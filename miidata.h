@@ -54,6 +54,7 @@ private:
 
     //Eyebrows
 
+
 protected:
 	static void _bind_methods();
 
@@ -83,7 +84,6 @@ public:
     bool get_special();
     void set_mac_address(String new_address);
     String get_mac_address();
-
     //General
     void set_sex(int wtfcppsex);
     int get_sex();
@@ -105,7 +105,8 @@ public:
     bool get_sharable();
     void set_author(String new_author);
     String get_author();
-
+    //Face Misc.
+    
     ~MiiDataResource();
 };
 
