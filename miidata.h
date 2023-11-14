@@ -17,26 +17,26 @@ private:
     int version = 3;
     bool profanity = false;
     int region_lock = 0;
-    int char_set;
+    int char_set = 0;
     int origin_device = 3;
-    int mii_id;
+    String mii_id;
     int creation_date;
     //bool unknown;
-    bool temporary;
-    bool dsi;
-    bool special;
+    bool temporary = false;
+    bool dsi = false;
+    bool special = false;
     String mac_address;
 
     //General
     int sex = 0;
-    int birthday_month;
-    int birthday_day;
-    int favorite_color;
-    bool favorite_mii;
+    int birthday_month = 10;
+    int birthday_day = 19;
+    int favorite_color = 5;
+    bool favorite_mii = false;
     String mii_name;
-    float width;
-    float height;
-    bool sharable;
+    int body_width = 1;
+    int body_height = 1;
+    bool sharable = true;
     String author;
 
     //Face misc.
@@ -53,8 +53,8 @@ private:
     //Eyes
     int eye_style;
     int eye_color;
-    int eye_x_scale;
-    int eye_y_scale;
+    int eye_x_scale = 1;
+    int eye_y_scale = 1;
     int eye_rotation;
     int eye_x_spacing;
     int eye_y_position;
@@ -62,40 +62,40 @@ private:
     //Eyebrows
     int eyebrow_style;
     int eyebrow_color;
-    int eyebrow_x_scale;
-    int eyebrow_y_scale;
+    int eyebrow_x_scale = 1;
+    int eyebrow_y_scale = 1;
     int eyebrow_rotation;
     int eyebrow_x_spacing;
     int eyebrow_y_position;
 
     //Nose
     int nose_style;
-    int nose_scale;
+    int nose_scale = 1;
     int nose_y_position;
 
     //Mouth
     int mouth_style;
     int mouth_color;
-    int mouth_x_scale;
-    int mouth_y_scale;
+    int mouth_x_scale = 1;
+    int mouth_y_scale = 1;
     int mouth_y_position;
 
     //Facial hair
     int beard_style;
     int beard_color;
     int mustache_style;
-    int mustache_scale;
+    int mustache_scale = 1;
     int mustache_y_position;
 
     //Glasses
     int glasses_style;
     int glasses_color;
-    int glasses_scale;
+    int glasses_scale = 1;
     int glasses_y_position;
 
     //Mole
-    bool has_mole;
-    int mole_scale;
+    bool has_mole = false;
+    int mole_scale = 1;
     int mole_x_position;
     int mole_y_position;
 
@@ -118,8 +118,8 @@ public:
     int get_char_set();
     void set_origin_device(int origin_dev);
     int get_origin_device();
-    void set_mii_id(int new_id);
-    int get_mii_id();
+    void set_mii_id(String new_id);
+    String get_mii_id();
     void set_creation_date(int date);
     int get_creation_date();
     void set_dsi(bool is_from_dsi);
@@ -141,10 +141,10 @@ public:
     bool get_favorite_mii();
     void set_mii_name(String new_name);
     String get_mii_name();
-    void set_width(float wideness);
-    float get_width();
-    void set_height(float heightness);
-    float get_height();
+    void set_body_width(int wideness);
+    int get_body_width();
+    void set_body_height(int heightness);
+    int get_body_height();
     void set_sharable(bool is_sharable);
     bool get_sharable();
     void set_author(String new_author);
