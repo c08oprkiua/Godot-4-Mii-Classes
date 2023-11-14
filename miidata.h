@@ -18,7 +18,6 @@ private:
     bool profanity = false;
     int region_lock = 0;
     int char_set;
-    //enum origin_device {Wii = 1, DS, ThreeDS, WiiUSwitch};
     int origin_device = 3;
     int mii_id;
     int creation_date;
@@ -29,7 +28,6 @@ private:
     String mac_address;
 
     //General
-    //enum sex {Male, Female};
     int sex = 0;
     int birthday_month;
     int birthday_day;
@@ -52,8 +50,54 @@ private:
     int hair_color; 
     bool hair_flip;
 
-    //Eyebrows
+    //Eyes
+    int eye_style;
+    int eye_color;
+    int eye_x_scale;
+    int eye_y_scale;
+    int eye_rotation;
+    int eye_x_spacing;
+    int eye_y_position;
 
+    //Eyebrows
+    int eyebrow_style;
+    int eyebrow_color;
+    int eyebrow_x_scale;
+    int eyebrow_y_scale;
+    int eyebrow_rotation;
+    int eyebrow_x_spacing;
+    int eyebrow_y_position;
+
+    //Nose
+    int nose_style;
+    int nose_scale;
+    int nose_y_position;
+
+    //Mouth
+    int mouth_style;
+    int mouth_color;
+    int mouth_x_scale;
+    int mouth_y_scale;
+    int mouth_y_position;
+
+    //Facial hair
+    int beard_style;
+    int beard_color;
+    int mustache_style;
+    int mustache_scale;
+    int mustache_y_position;
+
+    //Glasses
+    int glasses_style;
+    int glasses_color;
+    int glasses_scale;
+    int glasses_y_position;
+
+    //Mole
+    bool has_mole;
+    int mole_scale;
+    int mole_x_position;
+    int mole_y_position;
 
 protected:
 	static void _bind_methods();
@@ -106,7 +150,99 @@ public:
     void set_author(String new_author);
     String get_author();
     //Face Misc.
-    
+    void set_face_shape(int shape);
+    int get_face_shape();
+    void set_skin_color(int color);
+    int get_skin_color();
+    void set_wrinkles(int new_wrinkles);
+    int get_wrinkles();
+    void set_makeup(int new_makeup);
+    int get_makeup();
+    //Hair
+    void set_hair_style(int style);
+    int get_hair_style();
+    void set_hair_color(int color);
+    int get_hair_color();
+    void set_hair_flip(bool flip);
+    bool get_hair_flip();
+    //Eyes
+    void set_eye_style(int eye);
+    int get_eye_style();
+    void set_eye_color(int eye);
+    int get_eye_color(); 
+    void set_eye_x_scale(int eye);
+    int get_eye_x_scale();
+    void set_eye_y_scale(int eye);
+    int get_eye_y_scale();
+    void set_eye_rotation(int eye);
+    int get_eye_rotation();
+    void set_eye_x_spacing(int eye);
+    int get_eye_x_spacing();
+    void set_eye_y_position(int eye);
+    int get_eye_y_position();
+    //Eyebrows
+	void set_eyebrow_style(int val); 
+	int get_eyebrow_style();
+	void set_eyebrow_color(int val); 
+	int get_eyebrow_color();
+	void set_eyebrow_x_scale(int val); 
+	int get_eyebrow_x_scale();
+	void set_eyebrow_y_scale(int val); 
+	int get_eyebrow_y_scale();
+	void set_eyebrow_rotation(int val); 
+	int get_eyebrow_rotation();
+	void set_eyebrow_x_spacing(int val); 
+	int get_eyebrow_x_spacing();
+	void set_eyebrow_y_position(int val); 
+	int get_eyebrow_y_position();
+    //Nose
+	void set_nose_style(int val); 
+	int get_nose_style();
+	void set_nose_scale(int val); 
+	int get_nose_scale();
+	void set_nose_y_position(int val); 
+	int get_nose_y_position();
+    //Mouth
+	void set_mouth_style(int val); 
+	int get_mouth_style();
+	void set_mouth_color(int val); 
+	int get_mouth_color();
+	void set_mouth_x_scale(int val); 
+	int get_mouth_x_scale();
+	void set_mouth_y_scale(int val); 
+	int get_mouth_y_scale();
+	void set_mouth_y_position(int val); 
+	int get_mouth_y_position();
+    //Facial Hair
+	void set_beard_style(int val); 
+	int get_beard_style();
+	void set_beard_color(int val); 
+	int get_beard_color();
+	void set_mustache_style(int val); 
+	int get_mustache_style();
+	void set_mustache_scale(int val); 
+	int get_mustache_scale();
+	void set_mustache_y_position(int val); 
+	int get_mustache_y_position();
+    //Glasses
+	void set_glasses_style(int val); 
+	int get_glasses_style();
+	void set_glasses_color(int val); 
+	int get_glasses_color();
+	void set_glasses_scale(int val); 
+	int get_glasses_scale();
+	void set_glasses_y_position(int val); 
+	int get_glasses_y_position();
+    //Mole
+    void set_has_mole(bool val); 
+	bool get_has_mole();
+	void set_mole_scale(int val); 
+	int get_mole_scale();
+	void set_mole_x_position(int val); 
+	int get_mole_x_position();
+	void set_mole_y_position(int val); 
+	int get_mole_y_position();
+
     ~MiiDataResource();
 };
 
