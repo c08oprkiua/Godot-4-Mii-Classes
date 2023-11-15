@@ -8,6 +8,21 @@ class MiiDataResource :
 public Resource {
     GDCLASS(MiiDataResource, Resource);
 
+    enum favoritecolor {
+        COLOR_RED,
+        COLOR_ORANGE,
+        COLOR_YELLOW,
+        COLOR_LIGHT_GREEN, 
+        COLOR_DARK_GREEN, 
+        COLOR_BLUE, 
+        COLOR_LIGHT_BLUE, 
+        COLOR_PINK, 
+        COLOR_PURPLE, 
+        COLOR_BROWN, 
+        COLOR_WHITE, 
+        COLOR_BLACK
+    };
+    
 private:
 
     bool BoolCheck(int check);
@@ -20,7 +35,7 @@ private:
     int char_set = 0;
     int origin_device = 3;
     String mii_id;
-    int creation_date;
+    int creation_date = 0;
     //bool unknown;
     bool temporary = false;
     bool dsi = false;
@@ -40,64 +55,64 @@ private:
     String author;
 
     //Face misc.
-    int face_shape;
-    int skin_color;
-    int wrinkles;
-    int makeup;
+    int face_shape = 1;
+    int skin_color = 1;
+    int wrinkles = 1;
+    int makeup = 1;
 
     //Hair 
-    int hair_style;
-    int hair_color; 
-    bool hair_flip;
+    int hair_style = 1;
+    int hair_color = 1;
+    bool hair_flip = 1;
 
     //Eyes
-    int eye_style;
-    int eye_color;
+    int eye_style = 1;
+    int eye_color = 1;
     int eye_x_scale = 1;
     int eye_y_scale = 1;
-    int eye_rotation;
-    int eye_x_spacing;
-    int eye_y_position;
+    int eye_rotation = 1;
+    int eye_x_spacing = 1;
+    int eye_y_position = 1;
 
     //Eyebrows
-    int eyebrow_style;
-    int eyebrow_color;
+    int eyebrow_style = 1;
+    int eyebrow_color = 1;
     int eyebrow_x_scale = 1;
     int eyebrow_y_scale = 1;
-    int eyebrow_rotation;
-    int eyebrow_x_spacing;
-    int eyebrow_y_position;
+    int eyebrow_rotation = 1;
+    int eyebrow_x_spacing = 1;
+    int eyebrow_y_position = 1;
 
     //Nose
-    int nose_style;
+    int nose_style = 1;
     int nose_scale = 1;
-    int nose_y_position;
+    int nose_y_position = 1;
 
     //Mouth
-    int mouth_style;
-    int mouth_color;
+    int mouth_style = 1;
+    int mouth_color = 1;
     int mouth_x_scale = 1;
     int mouth_y_scale = 1;
-    int mouth_y_position;
+    int mouth_y_position = 1;
 
     //Facial hair
-    int beard_style;
-    int beard_color;
-    int mustache_style;
+    int beard_style = 1;
+    int beard_color = 1;
+    int mustache_style = 1;
     int mustache_scale = 1;
-    int mustache_y_position;
+    int mustache_y_position = 1;
 
     //Glasses
-    int glasses_style;
-    int glasses_color;
+    int glasses_style = 1;
+    int glasses_color = 1;
     int glasses_scale = 1;
-    int glasses_y_position;
+    int glasses_y_position = 1;
 
     //Mole
     bool has_mole = false;
     int mole_scale = 1;
-    int mole_x_position;
-    int mole_y_position;
+    int mole_x_position = 1;
+    int mole_y_position = 1;
 
 protected:
 	static void _bind_methods();

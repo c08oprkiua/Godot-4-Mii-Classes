@@ -18,6 +18,7 @@ void MiiDataResource::LoadFromBuffer(PackedByteArray buffer){
     //0x3
     binary = ByteToBinary(buffer.operator[](3));
     origin_device = BinaryToInt(binary.slice(4,6,1,true));
+
 }
 
 void MiiDataResource::WriteToBuffer(){
@@ -27,8 +28,7 @@ TypedArray<int> MiiDataResource::ByteToBinary(int byte){
     TypedArray<int> bytevalues;
     int bytesize;
     bytesize = 1;
-    while (bytesize < byte)
-    {
+    while (bytesize < byte){
         bytevalues.append(bytesize);
         bytesize = bytesize << 1;
     };

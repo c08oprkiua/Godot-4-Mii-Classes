@@ -151,8 +151,8 @@ void MiiDataResource::_bind_methods(){
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "profanity"), "set_profanity", "get_profanity");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "region_lock", PROPERTY_HINT_ENUM, "None, Japan, USA, Europe"), "set_region_lock", "get_region_lock");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "char_set", PROPERTY_HINT_ENUM, "Japan/USA/Europe, China, Korea, Taiwan"), "set_char_set", "get_char_set");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "origin_device", PROPERTY_HINT_ENUM, "Wii, DS, 3DS, Wii U/Switch"), "set_origin_device", "get_origin_device");
-    ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_id"), "get_mii_id", "get_mii_id");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "origin_device", PROPERTY_HINT_ENUM, "Wii:1, DS:2, 3DS:3, Wii U/Switch:4"), "set_origin_device", "get_origin_device");
+    ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_id"), "set_mii_id", "get_mii_id");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "creation_date"), "set_creation_date", "get_creation_date");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "dsi"), "set_dsi", "get_dsi");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "special"), "set_special", "get_special");
@@ -162,13 +162,13 @@ void MiiDataResource::_bind_methods(){
     ADD_PROPERTY(PropertyInfo(Variant::INT, "sex", PROPERTY_HINT_ENUM, "Male, Female"), "set_sex", "get_sex");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "birthday_month", PROPERTY_HINT_ENUM, "January,February,March,April,May,June,July,August,September,October,November,December"), "set_birthday_month", "get_birthday_month"); 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "birthday_day", PROPERTY_HINT_RANGE, "1,31"), "set_birthday_day", "get_birthday_day"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "favorite_color", PROPERTY_HINT_RANGE, "0,12"), "set_favorite_color", "get_favorite_color"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "favorite_color", PROPERTY_HINT_ENUM, "Red,Orange,Yellow,Light Green, Dark Green, Blue, Light Blue, Pink, Purple, Brown, White, Black"), "set_favorite_color", "get_favorite_color"); 
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "favorite_mii"), "set_favorite_mii", "get_favorite_mii");
-    ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_name"), "set_mii_name", "get_mii_name");
+    ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_name", PROPERTY_HINT_TYPE_STRING, "10"), "set_mii_name", "get_mii_name");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "width", PROPERTY_HINT_RANGE, "0,10"), "set_body_width", "get_body_width");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "height", PROPERTY_HINT_RANGE, "0,10"), "set_body_height", "get_body_height");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "sharable"), "set_sharable", "get_sharable");
-    ADD_PROPERTY(PropertyInfo(Variant::STRING, "author"), "set_author", "get_author");
+    ADD_PROPERTY(PropertyInfo(Variant::STRING, "author", PROPERTY_HINT_TYPE_STRING, "10"), "set_author", "get_author");
 
     ADD_GROUP("Face Misc.", "");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "face_shape", PROPERTY_HINT_RANGE, "0,10"), "set_face_shape", "get_face_shape"); 
@@ -229,7 +229,6 @@ void MiiDataResource::_bind_methods(){
     ADD_PROPERTY(PropertyInfo(Variant::INT, "mole_scale", PROPERTY_HINT_RANGE, "0,9"), "set_mole_scale", "get_mole_scale");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "mole_x_position", PROPERTY_HINT_RANGE, "0,17"), "set_mole_x_position", "get_mole_x_position");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "mole_y_position", PROPERTY_HINT_RANGE, "0,31"), "set_mole_y_position", "get_mole_y_position");
-
 
 }
 
