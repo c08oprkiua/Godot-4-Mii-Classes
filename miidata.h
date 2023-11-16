@@ -7,8 +7,30 @@
 class MiiDataResource : 
 public Resource {
     GDCLASS(MiiDataResource, Resource);
+public:
+    //all the enum declarations
 
-    enum favoritecolor {
+    enum RegLockType {
+        NO_LOCK,
+        JP_ONLY,
+        US_ONLY,
+        EU_ONLY,
+    }
+
+    enum CharSetType {
+        CHAR_JAPAN_USA_EUROPE, 
+        CHAR_CHINA, 
+        CHAR_KOREA, 
+        CHAR_TAIWAN
+    }
+
+    enum Devices {
+        DEVICE_WII = 1,
+        DEVICE_DS,
+        DEVICE_THREEDS,
+        DEVICE_WII_U_SWITCH,
+    };
+    enum FavColor {
         COLOR_RED,
         COLOR_ORANGE,
         COLOR_YELLOW,
@@ -22,18 +44,40 @@ public Resource {
         COLOR_WHITE, 
         COLOR_BLACK
     };
-    
+    enum Months {
+        MONTH_JANUARY,
+        MONTH_FEBRUARY,
+        MONTH_MARCH,
+        MONTH_APRIL,
+        MONTH_MAY,
+        MONTH_JUNE,
+        MONTH_JULY,
+        MONTH_AUGUST,
+        MONTH_SEPTEMBER,
+        MONTH_OCTOBER,
+        MONTH_NOVEMBER,
+        MONTH_DECEMBER
+    };
+    //Haha, Mii sex, very funny//
+    enum MiiSex {
+        SEX_MALE,
+        SEX_FEMALE
+    };
+
+
 private:
 
     bool BoolCheck(int check);
     int BinaryToInt(TypedArray<int> binary);
     TypedArray<int> ByteToBinary(int byte);
+
+public:
     // Meta
     int version = 3;
     bool profanity = false;
     int region_lock = 0;
     int char_set = 0;
-    int origin_device = 3;
+    Devices origin_device = DEVICE_WII_U_SWITCH;
     String mii_id;
     int creation_date = 0;
     //bool unknown;
@@ -43,10 +87,10 @@ private:
     String mac_address;
 
     //General
-    int sex = 0;
-    int birthday_month = 10;
+    MiiSex sex = SEX_MALE;
+    Months birthday_month = MONTH_NOVEMBER;
     int birthday_day = 19;
-    int favorite_color = 5;
+    FavColor favorite_color = COLOR_RED;
     bool favorite_mii = false;
     String mii_name;
     int body_width = 1;
@@ -131,8 +175,8 @@ public:
     int get_region_lock();
     void set_char_set(int char_set);
     int get_char_set();
-    void set_origin_device(int origin_dev);
-    int get_origin_device();
+    void set_origin_device(Devices origin_dev);
+    Devices get_origin_device();
     void set_mii_id(String new_id);
     String get_mii_id();
     void set_creation_date(int date);
@@ -144,14 +188,14 @@ public:
     void set_mac_address(String new_address);
     String get_mac_address();
     //General
-    void set_sex(int wtfcppsex);
-    int get_sex();
-    void set_birthday_month(int bdaymonth);
-    int get_birthday_month();
+    void set_sex(MiiSex wtfcppsex);
+    MiiSex get_sex();
+    void set_birthday_month(Months bdaymonth);
+    Months get_birthday_month(); 
     void set_birthday_day(int bdayday);
     int get_birthday_day();
-    void set_favorite_color(int color);
-    int get_favorite_color();
+    void set_favorite_color(FavColor color);
+    FavColor get_favorite_color();
     void set_favorite_mii(bool favorite);
     bool get_favorite_mii();
     void set_mii_name(String new_name);
@@ -261,6 +305,10 @@ public:
     ~MiiDataResource();
 };
 
+VARIANT_ENUM_CAST(MiiDataResource::Devices);
+VARIANT_ENUM_CAST(MiiDataResource::FavColor);
+VARIANT_ENUM_CAST(MiiDataResource::Months);
+VARIANT_ENUM_CAST(MiiDataResource::MiiSex);
 
 
 #endif

@@ -146,6 +146,44 @@ void MiiDataResource::_bind_methods(){
     ClassDB::bind_method(D_METHOD("set_mole_y_position", "mole_y_position"), &MiiDataResource::set_mole_y_position);
     ClassDB::bind_method(D_METHOD("get_mole_y_position"), &MiiDataResource::get_mole_y_position);
 
+    //Devices
+    BIND_ENUM_CONSTANT(DEVICE_WII);
+    BIND_ENUM_CONSTANT(DEVICE_DS);
+    BIND_ENUM_CONSTANT(DEVICE_THREEDS);
+    BIND_ENUM_CONSTANT(DEVICE_WII_U_SWITCH);
+
+    //FavColor
+    BIND_ENUM_CONSTANT(COLOR_RED);
+    BIND_ENUM_CONSTANT(COLOR_ORANGE);
+    BIND_ENUM_CONSTANT(COLOR_YELLOW);
+    BIND_ENUM_CONSTANT(COLOR_LIGHT_GREEN);
+    BIND_ENUM_CONSTANT(COLOR_DARK_GREEN);
+    BIND_ENUM_CONSTANT(COLOR_BLUE);
+    BIND_ENUM_CONSTANT(COLOR_LIGHT_BLUE);
+    BIND_ENUM_CONSTANT(COLOR_PINK);
+    BIND_ENUM_CONSTANT(COLOR_PURPLE);
+    BIND_ENUM_CONSTANT(COLOR_BROWN);
+    BIND_ENUM_CONSTANT(COLOR_WHITE);
+    BIND_ENUM_CONSTANT(COLOR_BLACK);
+
+    //Months
+    BIND_ENUM_CONSTANT(MONTH_JANUARY);
+    BIND_ENUM_CONSTANT(MONTH_FEBRUARY);
+    BIND_ENUM_CONSTANT(MONTH_MARCH);
+    BIND_ENUM_CONSTANT(MONTH_APRIL);
+    BIND_ENUM_CONSTANT(MONTH_MAY);
+    BIND_ENUM_CONSTANT(MONTH_JUNE);
+    BIND_ENUM_CONSTANT(MONTH_JULY);
+    BIND_ENUM_CONSTANT(MONTH_AUGUST);
+    BIND_ENUM_CONSTANT(MONTH_SEPTEMBER);
+    BIND_ENUM_CONSTANT(MONTH_OCTOBER);
+    BIND_ENUM_CONSTANT(MONTH_NOVEMBER);
+    BIND_ENUM_CONSTANT(MONTH_DECEMBER);
+
+    //MiiSex
+    BIND_ENUM_CONSTANT(SEX_MALE);
+    BIND_ENUM_CONSTANT(SEX_FEMALE);
+
     ADD_GROUP("Meta", "");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "version", PROPERTY_HINT_RANGE, "0,3"), "set_version", "get_version");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "profanity"), "set_profanity", "get_profanity");
@@ -164,11 +202,11 @@ void MiiDataResource::_bind_methods(){
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "birthday_day", PROPERTY_HINT_RANGE, "1,31"), "set_birthday_day", "get_birthday_day"); 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "favorite_color", PROPERTY_HINT_ENUM, "Red,Orange,Yellow,Light Green, Dark Green, Blue, Light Blue, Pink, Purple, Brown, White, Black"), "set_favorite_color", "get_favorite_color"); 
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "favorite_mii"), "set_favorite_mii", "get_favorite_mii");
-    ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_name", PROPERTY_HINT_TYPE_STRING, "10"), "set_mii_name", "get_mii_name");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "width", PROPERTY_HINT_RANGE, "0,10"), "set_body_width", "get_body_width");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "height", PROPERTY_HINT_RANGE, "0,10"), "set_body_height", "get_body_height");
+    ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_name"), "set_mii_name", "get_mii_name");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "width", PROPERTY_HINT_RANGE, "0,127"), "set_body_width", "get_body_width");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "height", PROPERTY_HINT_RANGE, "0,127"), "set_body_height", "get_body_height");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "sharable"), "set_sharable", "get_sharable");
-    ADD_PROPERTY(PropertyInfo(Variant::STRING, "author", PROPERTY_HINT_TYPE_STRING, "10"), "set_author", "get_author");
+    ADD_PROPERTY(PropertyInfo(Variant::STRING, "author"), "set_author", "get_author");
 
     ADD_GROUP("Face Misc.", "");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "face_shape", PROPERTY_HINT_RANGE, "0,10"), "set_face_shape", "get_face_shape"); 

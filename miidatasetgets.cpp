@@ -27,10 +27,15 @@ void MiiDataResource::set_char_set(int val){
 int MiiDataResource::get_char_set(){
     return char_set;
 }
-void MiiDataResource::set_origin_device(int val){
-    origin_device = val;
+void MiiDataResource::set_origin_device(Devices val){
+    if ((int)val < 1 || (int)val > 4){
+        origin_device = DEVICE_WII_U_SWITCH;
+    }
+    else {
+        origin_device = val;
+    }
 }
-int MiiDataResource::get_origin_device(){
+MiiDataResource::Devices MiiDataResource::get_origin_device(){
     return origin_device;
 }
 void MiiDataResource::set_mii_id(String val){
@@ -65,28 +70,81 @@ String MiiDataResource::get_mac_address(){
 }
 
 //General
-void MiiDataResource::set_sex(int wtfcppsex){
-    sex = wtfcppsex;
+void MiiDataResource::set_sex(MiiSex wtfcppsex){
+    if ((int)wtfcppsex > 1 || (int)wtfcppsex < 0){
+    sex = SEX_MALE;
+    }
+    else {
+        sex = wtfcppsex;
+    }
 }
-int MiiDataResource::get_sex(){
+MiiDataResource::MiiSex MiiDataResource::get_sex(){
     return sex;
 }
-void MiiDataResource::set_birthday_month(int val){
+void MiiDataResource::set_birthday_month(Months val){
+    if ((int)val > 11 || (int)val < 0) {
+        birthday_day = MONTH_NOVEMBER;
+    }
+    else{
     birthday_month = val;
+    }
 }
-int MiiDataResource::get_birthday_month(){
+MiiDataResource::Months MiiDataResource::get_birthday_month(){
     return birthday_month;
 }
 void MiiDataResource::set_birthday_day(int val){
+    if (val < 1){
+        val = 1;
+        birthday_day = val;
+        return;
+    };
+    if (val >= 32){
+        val = 31;
+    };
+    uint8_t maxday;
+    switch(val){
+        case MONTH_JANUARY:
+            maxday = 31;
+        case MONTH_FEBRUARY:
+            maxday = 28;
+        case MONTH_MARCH:
+            maxday = 31;
+        case MONTH_APRIL:
+            maxday = 30;
+        case MONTH_MAY:
+            maxday = 31;
+        case MONTH_JUNE:
+            maxday = 30;
+        case MONTH_JULY:
+            maxday = 31;
+        case MONTH_AUGUST:
+            maxday = 31;
+        case MONTH_SEPTEMBER:
+            maxday = 30;
+        case MONTH_OCTOBER:
+            maxday = 31;
+        case MONTH_NOVEMBER:
+            maxday = 30;
+        case MONTH_DECEMBER:
+            maxday = 31;
+    };
+    if (val > maxday){
+        val = maxday;
+    };
     birthday_day = val;
 }
 int MiiDataResource::get_birthday_day(){
     return birthday_day;
 }
-void MiiDataResource::set_favorite_color(int val){
-    favorite_color = val;
+void MiiDataResource::set_favorite_color(FavColor val){
+    if ((int)val < 0 || (int)val > 11){
+        favorite_color = COLOR_RED;
+    }
+    else {
+        favorite_color = val;
+    }
 }
-int MiiDataResource::get_favorite_color(){
+MiiDataResource::FavColor MiiDataResource::get_favorite_color(){
     return favorite_color;
 }
 void MiiDataResource::set_favorite_mii(bool val){

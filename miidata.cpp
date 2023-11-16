@@ -17,7 +17,7 @@ void MiiDataResource::LoadFromBuffer(PackedByteArray buffer){
     char_set = BinaryToInt(binary.slice(4,5,1,true));
     //0x3
     binary = ByteToBinary(buffer.operator[](3));
-    origin_device = BinaryToInt(binary.slice(4,6,1,true));
+    //origin_device = BinaryToInt(binary.slice(4,6,1,true));
 
 }
 
