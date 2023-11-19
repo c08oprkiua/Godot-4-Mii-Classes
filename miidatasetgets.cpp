@@ -15,16 +15,16 @@ void MiiDataResource::set_profanity(int val){
 bool MiiDataResource::get_profanity(){
     return profanity;
 }
-void MiiDataResource::set_region_lock(int val){
+void MiiDataResource::set_region_lock(RegLockType val){
     region_lock = val;
 }
-int MiiDataResource::get_region_lock(){
+MiiDataResource::RegLockType MiiDataResource::get_region_lock(){
     return region_lock;
 }
-void MiiDataResource::set_char_set(int val){
+void MiiDataResource::set_char_set(CharSetType val){
     char_set = val;
 }
-int MiiDataResource::get_char_set(){
+MiiDataResource::CharSetType MiiDataResource::get_char_set(){
     return char_set;
 }
 void MiiDataResource::set_origin_device(Devices val){
