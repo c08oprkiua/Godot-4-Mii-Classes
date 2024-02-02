@@ -1,4 +1,4 @@
-#include "miidata.h"
+#include "miidata.hpp"
 
 
 void MiiDataResource::_bind_methods(){
@@ -145,6 +145,20 @@ void MiiDataResource::_bind_methods(){
     ClassDB::bind_method(D_METHOD("get_mole_x_position"), &MiiDataResource::get_mole_x_position);
     ClassDB::bind_method(D_METHOD("set_mole_y_position", "mole_y_position"), &MiiDataResource::set_mole_y_position);
     ClassDB::bind_method(D_METHOD("get_mole_y_position"), &MiiDataResource::get_mole_y_position);
+
+    //enums
+
+    //RegLockType
+    BIND_ENUM_CONSTANT(REGLOCK_NONE);
+    BIND_ENUM_CONSTANT(REGLOCK_JP_ONLY);
+    BIND_ENUM_CONSTANT(REGLOCK_US_ONLY);
+    BIND_ENUM_CONSTANT(REGLOCK_EU_ONLY);
+
+    //CharSetType
+    BIND_ENUM_CONSTANT(CHAR_JAPAN_USA_EUROPE);
+    BIND_ENUM_CONSTANT(CHAR_CHINA);
+    BIND_ENUM_CONSTANT(CHAR_KOREA);
+    BIND_ENUM_CONSTANT(CHAR_TAIWAN);
 
     //Devices
     BIND_ENUM_CONSTANT(DEVICE_WII);

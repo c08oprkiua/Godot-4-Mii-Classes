@@ -10,27 +10,27 @@ public Resource {
 public:
     //all the enum declarations
 
-    enum RegLockType {
-        NO_LOCK,
-        JP_ONLY,
-        US_ONLY,
-        EU_ONLY,
-    }
+    enum RegLockType: uint8_t {
+        REGLOCK_NONE,
+        REGLOCK_JP_ONLY,
+        REGLOCK_US_ONLY,
+        REGLOCK_EU_ONLY,
+    };
 
-    enum CharSetType {
+    enum CharSetType: uint8_t {
         CHAR_JAPAN_USA_EUROPE, 
         CHAR_CHINA, 
         CHAR_KOREA, 
         CHAR_TAIWAN
-    }
+    };
 
-    enum Devices {
+    enum Devices: uint8_t {
         DEVICE_WII = 1,
         DEVICE_DS,
         DEVICE_THREEDS,
         DEVICE_WII_U_SWITCH,
     };
-    enum FavColor {
+    enum FavColor: uint8_t {
         COLOR_RED,
         COLOR_ORANGE,
         COLOR_YELLOW,
@@ -44,7 +44,7 @@ public:
         COLOR_WHITE, 
         COLOR_BLACK
     };
-    enum Months {
+    enum Months: uint8_t {
         MONTH_JANUARY,
         MONTH_FEBRUARY,
         MONTH_MARCH,
@@ -58,8 +58,9 @@ public:
         MONTH_NOVEMBER,
         MONTH_DECEMBER
     };
+    
     //Haha, Mii sex, very funny//
-    enum MiiSex {
+    enum MiiSex: uint8_t {
         SEX_MALE,
         SEX_FEMALE
     };
@@ -68,17 +69,18 @@ public:
 private:
 
     bool BoolCheck(int check);
-    int BinaryToInt(TypedArray<int> binary);
-    TypedArray<int> ByteToBinary(int byte);
 
 public:
+
     // Meta
     int version = 3;
     bool profanity = false;
-    int region_lock = 0;
-    int char_set = 0;
+    RegLockType region_lock = REGLOCK_NONE;
+    CharSetType char_set = CHAR_JAPAN_USA_EUROPE;
     Devices origin_device = DEVICE_WII_U_SWITCH;
-    String mii_id;
+
+    //Mii ID
+    String mii_id; //Todo: Make this value read-only
     int creation_date = 0;
     //bool unknown;
     bool temporary = false;
@@ -97,6 +99,9 @@ public:
     int body_height = 1;
     bool sharable = true;
     String author;
+
+    //It'd be a neat detail if all these values were set
+    // to match that one default red shirt mii
 
     //Face misc.
     int face_shape = 1;
@@ -165,16 +170,16 @@ public:
     MiiDataResource();
     void LoadFromBuffer(PackedByteArray buffer);
 
-    void WriteToBuffer();
+    PackedByteArray WriteToBuffer();
     //Meta
     void set_version(int version);
     int get_version();
     void set_profanity(int profanity);
     bool get_profanity();
-    void set_region_lock(int region_lock);
-    int get_region_lock();
-    void set_char_set(int char_set);
-    int get_char_set();
+    void set_region_lock(RegLockType region_lock);
+    RegLockType get_region_lock();
+    void set_char_set(CharSetType char_set);
+    CharSetType get_char_set();
     void set_origin_device(Devices origin_dev);
     Devices get_origin_device();
     void set_mii_id(String new_id);
@@ -305,10 +310,11 @@ public:
     ~MiiDataResource();
 };
 
+VARIANT_ENUM_CAST(MiiDataResource::RegLockType);
+VARIANT_ENUM_CAST(MiiDataResource::CharSetType);
 VARIANT_ENUM_CAST(MiiDataResource::Devices);
 VARIANT_ENUM_CAST(MiiDataResource::FavColor);
 VARIANT_ENUM_CAST(MiiDataResource::Months);
 VARIANT_ENUM_CAST(MiiDataResource::MiiSex);
-
 
 #endif

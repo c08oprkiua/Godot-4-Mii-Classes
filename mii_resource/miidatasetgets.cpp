@@ -1,4 +1,4 @@
-#include "miidata.h"
+#include "miidata.hpp"
 
 //Oh boy, a million SetGets
 
@@ -15,16 +15,16 @@ void MiiDataResource::set_profanity(int val){
 bool MiiDataResource::get_profanity(){
     return profanity;
 }
-void MiiDataResource::set_region_lock(int val){
+void MiiDataResource::set_region_lock(RegLockType val){
     region_lock = val;
 }
-int MiiDataResource::get_region_lock(){
+MiiDataResource::RegLockType MiiDataResource::get_region_lock(){
     return region_lock;
 }
-void MiiDataResource::set_char_set(int val){
+void MiiDataResource::set_char_set(CharSetType val){
     char_set = val;
 }
-int MiiDataResource::get_char_set(){
+MiiDataResource::CharSetType MiiDataResource::get_char_set(){
     return char_set;
 }
 void MiiDataResource::set_origin_device(Devices val){
@@ -102,6 +102,8 @@ void MiiDataResource::set_birthday_day(int val){
         val = 31;
     };
     uint8_t maxday;
+    //I could just AND with a singular bit to find even
+    // numbers and then sus it from there, it'd be faster, but eh
     switch(val){
         case MONTH_JANUARY:
             maxday = 31;
@@ -121,7 +123,7 @@ void MiiDataResource::set_birthday_day(int val){
             maxday = 31;
         case MONTH_SEPTEMBER:
             maxday = 30;
-        case MONTH_OCTOBER:
+        case MONTH_OCTOBER | MONTH_DECEMBER:
             maxday = 31;
         case MONTH_NOVEMBER:
             maxday = 30;
@@ -137,6 +139,7 @@ int MiiDataResource::get_birthday_day(){
     return birthday_day;
 }
 void MiiDataResource::set_favorite_color(FavColor val){
+    //Because what can be passed in from Godot could be signed or bigger than the enum
     if ((int)val < 0 || (int)val > 11){
         favorite_color = COLOR_RED;
     }

@@ -1,0 +1,45 @@
+<class name="MiiDataResource" inherits="Resource" version="4.2">
+    <brief_description>
+        A Resource class for handling Mii data.
+    </brief_description>
+    <description>
+    A custom Resource class specifically designed to contain, edit, and parse Mii data. "Mii data" is a raw buffer of data, varying in length depending on what [member MiiDataResource.version] it is.
+    </description>
+    <tutorials>
+        <link title="View the source code on Github">https://github.com/c08oprkiua/Godot-4-Mii-Resource-Class</link>
+    </tutorials>
+    <methods>
+        <method name="LoadBuffer">
+            <return type="void">
+            </return>
+            <argument index="0" name="buffer" type="PackedByteArray">
+            </argument>
+            <description>
+                Loads a raw buffer of data into the instantiated MiiDataResource for further usage. 
+            </description>
+        </method>
+        [...]
+        <method name="WriteBuffer">
+            <return type="PackedByteArray">
+            </return>
+            <argument>
+            </argument>
+            <description>
+                Turns the MiiDataResource's data back into a Nintendo-compliant buffer of data.
+            </description>
+        </method>
+    </methods>
+    <members>
+        <member name="version" type="int" setter="get_version" getter="set_version">
+            The revision of Mii Data this Mii is using. Numbering system more or less matches [enum MiiDataResource.Devices].
+        </member>
+        [...]
+        <member name="profanity" type="bool" setter="set_profanity" getter="get_profanity" default="false">
+            This is a flag that under official circumstances, indicates that the [member MiiDataResource.mii_name] or [member MiiDataResource.author] contains profane language in their name.
+        </member>
+        <member name="region_lock" type="enum" setter="set_region_lock" getter="get_region_lock">
+        </member>
+    </members>
+    <constants>
+    </constants>
+</class>
