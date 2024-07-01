@@ -2,8 +2,10 @@
 
 
 void MiiDataResource::_bind_methods(){
-    ClassDB::bind_method(D_METHOD("LoadFromBuffer", "buffer"), &MiiDataResource::LoadFromBuffer);
-    ClassDB::bind_method(D_METHOD("WriteToBuffer"), &MiiDataResource::WriteToBuffer);
+    ClassDB::bind_method(D_METHOD("load_from_buffer", "buffer"), &MiiDataResource::LoadFromBuffer);
+    ClassDB::bind_method(D_METHOD("write_to_buffer", "target_output"), &MiiDataResource::WriteToBuffer);
+    ClassDB::bind_method(D_METHOD("get_favorite_color"), &MiiDataResource::get_favorite_color);
+
     //Meta
     ClassDB::bind_method(D_METHOD("set_version", "new_version"), &MiiDataResource::set_version);
     ClassDB::bind_method(D_METHOD("get_version"), &MiiDataResource::get_version);
@@ -27,15 +29,15 @@ void MiiDataResource::_bind_methods(){
     ClassDB::bind_method(D_METHOD("get_mac_address"), &MiiDataResource::get_mac_address);
     
     //General
-    ClassDB::bind_method(D_METHOD("set_sex", "sex"), &MiiDataResource::set_sex);
-    ClassDB::bind_method(D_METHOD("get_sex"), &MiiDataResource::get_sex);
+    ClassDB::bind_method(D_METHOD("set_gender", "gender"), &MiiDataResource::set_gender);
+    ClassDB::bind_method(D_METHOD("get_gender"), &MiiDataResource::get_gender);
     ClassDB::bind_method(D_METHOD("set_birthday_month", "birthday_month"), &MiiDataResource::set_birthday_month);
     ClassDB::bind_method(D_METHOD("get_birthday_month"), &MiiDataResource::get_birthday_month);
     ClassDB::bind_method(D_METHOD("set_birthday_day", "birthday_day"), &MiiDataResource::set_birthday_day);
     ClassDB::bind_method(D_METHOD("get_birthday_day"), &MiiDataResource::get_birthday_day);
-    ClassDB::bind_method(D_METHOD("set_favorite_color", "favorite_color"), &MiiDataResource::set_favorite_color);
-    ClassDB::bind_method(D_METHOD("get_favorite_color"), &MiiDataResource::get_favorite_color);
-    ClassDB::bind_method(D_METHOD("set_favorite_mii", "is__a_favorite"), &MiiDataResource::set_favorite_mii);
+    ClassDB::bind_method(D_METHOD("set_favorite_color_value", "favorite_color"), &MiiDataResource::set_favorite_color_value);
+    ClassDB::bind_method(D_METHOD("get_favorite_color_value"), &MiiDataResource::get_favorite_color_value);
+    ClassDB::bind_method(D_METHOD("set_favorite_mii", "is_a_favorite"), &MiiDataResource::set_favorite_mii);
     ClassDB::bind_method(D_METHOD("get_favorite_mii"), &MiiDataResource::get_favorite_mii);
     ClassDB::bind_method(D_METHOD("set_mii_name", "new_name"), &MiiDataResource::set_mii_name);
     ClassDB::bind_method(D_METHOD("get_mii_name"), &MiiDataResource::get_mii_name);
@@ -53,20 +55,24 @@ void MiiDataResource::_bind_methods(){
     ClassDB::bind_method(D_METHOD("get_face_shape"), &MiiDataResource::get_face_shape);
     ClassDB::bind_method(D_METHOD("set_skin_color", "skin_color"), &MiiDataResource::set_skin_color);
     ClassDB::bind_method(D_METHOD("get_skin_color"), &MiiDataResource::get_skin_color);
+    ClassDB::bind_method(D_METHOD("set_wrinkles", "wrinkles"), &MiiDataResource::set_wrinkles);
+    ClassDB::bind_method(D_METHOD("get_wrinkles"), &MiiDataResource::get_wrinkles);
+    ClassDB::bind_method(D_METHOD("set_makeup", "makeup"), &MiiDataResource::set_makeup);
+    ClassDB::bind_method(D_METHOD("get_makeup"), &MiiDataResource::get_makeup);
 
     //Hair
     ClassDB::bind_method(D_METHOD("set_hair_style", "hair_style"), &MiiDataResource::set_hair_style);
     ClassDB::bind_method(D_METHOD("get_hair_style"), &MiiDataResource::get_hair_style);
-    ClassDB::bind_method(D_METHOD("set_hair_color", "hair_color"), &MiiDataResource::set_hair_color);
-    ClassDB::bind_method(D_METHOD("get_hair_color"), &MiiDataResource::get_hair_color);
+    ClassDB::bind_method(D_METHOD("set_hair_color_value", "hair_color"), &MiiDataResource::set_hair_color_value);
+    ClassDB::bind_method(D_METHOD("get_hair_color_value"), &MiiDataResource::get_hair_color_value);
     ClassDB::bind_method(D_METHOD("set_hair_flip", "hair_flip"), &MiiDataResource::set_hair_flip);
     ClassDB::bind_method(D_METHOD("get_hair_flip"), &MiiDataResource::get_hair_flip);
 
     //Eyes
     ClassDB::bind_method(D_METHOD("set_eye_style", "eye_style"), &MiiDataResource::set_eye_style);
     ClassDB::bind_method(D_METHOD("get_eye_style"), &MiiDataResource::get_eye_style);
-    ClassDB::bind_method(D_METHOD("set_eye_color", "eye_color"), &MiiDataResource::set_eye_color);
-    ClassDB::bind_method(D_METHOD("get_eye_color"), &MiiDataResource::get_eye_color);
+    ClassDB::bind_method(D_METHOD("set_eye_color_value", "eye_color"), &MiiDataResource::set_eye_color_value);
+    ClassDB::bind_method(D_METHOD("get_eye_color_value"), &MiiDataResource::get_eye_color_value);
     ClassDB::bind_method(D_METHOD("set_eye_x_scale", "eye_x_scale"), &MiiDataResource::set_eye_x_scale);
     ClassDB::bind_method(D_METHOD("get_eye_x_scale"), &MiiDataResource::get_eye_x_scale);
     ClassDB::bind_method(D_METHOD("set_eye_y_scale", "eye_y_scale"), &MiiDataResource::set_eye_y_scale);
@@ -81,8 +87,8 @@ void MiiDataResource::_bind_methods(){
     //Eyebrows
     ClassDB::bind_method(D_METHOD("set_eyebrow_style", "eyebrow_style"), &MiiDataResource::set_eyebrow_style);
     ClassDB::bind_method(D_METHOD("get_eyebrow_style"), &MiiDataResource::get_eyebrow_style);
-    ClassDB::bind_method(D_METHOD("set_eyebrow_color", "eyebrow_color"), &MiiDataResource::set_eyebrow_color);
-    ClassDB::bind_method(D_METHOD("get_eyebrow_color"), &MiiDataResource::get_eyebrow_color);
+    ClassDB::bind_method(D_METHOD("set_eyebrow_color_value", "eyebrow_color"), &MiiDataResource::set_eyebrow_color_value);
+    ClassDB::bind_method(D_METHOD("get_eyebrow_color_value"), &MiiDataResource::get_eyebrow_color_value);
     ClassDB::bind_method(D_METHOD("set_eyebrow_x_scale", "eyebrow_x_scale"), &MiiDataResource::set_eyebrow_x_scale);
     ClassDB::bind_method(D_METHOD("get_eyebrow_x_scale"), &MiiDataResource::get_eyebrow_x_scale);
     ClassDB::bind_method(D_METHOD("set_eyebrow_y_scale", "eyebrow_y_scale"), &MiiDataResource::set_eyebrow_y_scale);
@@ -105,8 +111,8 @@ void MiiDataResource::_bind_methods(){
     //Mouth
     ClassDB::bind_method(D_METHOD("set_mouth_style", "mouth_style"), &MiiDataResource::set_mouth_style);
     ClassDB::bind_method(D_METHOD("get_mouth_style"), &MiiDataResource::get_mouth_style);
-    ClassDB::bind_method(D_METHOD("set_mouth_color", "mouth_color"), &MiiDataResource::set_mouth_color);
-    ClassDB::bind_method(D_METHOD("get_mouth_color"), &MiiDataResource::get_mouth_color);
+    ClassDB::bind_method(D_METHOD("set_mouth_color_value", "mouth_color"), &MiiDataResource::set_mouth_color_value);
+    ClassDB::bind_method(D_METHOD("get_mouth_color_value"), &MiiDataResource::get_mouth_color_value);
     ClassDB::bind_method(D_METHOD("set_mouth_x_scale", "mouth_x_scale"), &MiiDataResource::set_mouth_x_scale);
     ClassDB::bind_method(D_METHOD("get_mouth_x_scale"), &MiiDataResource::get_mouth_x_scale);
     ClassDB::bind_method(D_METHOD("set_mouth_y_scale", "mouth_y_scale"), &MiiDataResource::set_mouth_y_scale);
@@ -117,8 +123,8 @@ void MiiDataResource::_bind_methods(){
     //Facial Hair
     ClassDB::bind_method(D_METHOD("set_beard_style", "beard_style"), &MiiDataResource::set_beard_style);
     ClassDB::bind_method(D_METHOD("get_beard_style"), &MiiDataResource::get_beard_style);
-    ClassDB::bind_method(D_METHOD("set_beard_color", "beard_color"), &MiiDataResource::set_beard_color);
-    ClassDB::bind_method(D_METHOD("get_beard_color"), &MiiDataResource::get_beard_color);
+    ClassDB::bind_method(D_METHOD("set_beard_color_value", "beard_color"), &MiiDataResource::set_beard_color_value);
+    ClassDB::bind_method(D_METHOD("get_beard_color_value"), &MiiDataResource::get_beard_color_value);
     ClassDB::bind_method(D_METHOD("set_mustache_style", "mustache_style"), &MiiDataResource::set_mustache_style);
     ClassDB::bind_method(D_METHOD("get_mustache_style"), &MiiDataResource::get_mustache_style);
     ClassDB::bind_method(D_METHOD("set_mustache_scale", "mustache_scale"), &MiiDataResource::set_mustache_scale);
@@ -129,15 +135,15 @@ void MiiDataResource::_bind_methods(){
     //Glasses
     ClassDB::bind_method(D_METHOD("set_glasses_style", "glasses_style"), &MiiDataResource::set_glasses_style);
     ClassDB::bind_method(D_METHOD("get_glasses_style"), &MiiDataResource::get_glasses_style);
-    ClassDB::bind_method(D_METHOD("set_glasses_color", "glasses_color"), &MiiDataResource::set_glasses_color);
-    ClassDB::bind_method(D_METHOD("get_glasses_color"), &MiiDataResource::get_glasses_color);
+    ClassDB::bind_method(D_METHOD("set_glasses_color_value", "glasses_color"), &MiiDataResource::set_glasses_color_value);
+    ClassDB::bind_method(D_METHOD("get_glasses_color_value"), &MiiDataResource::get_glasses_color_value);
     ClassDB::bind_method(D_METHOD("set_glasses_scale", "glasses_scale"), &MiiDataResource::set_glasses_scale);
     ClassDB::bind_method(D_METHOD("get_glasses_scale"), &MiiDataResource::get_glasses_scale);
     ClassDB::bind_method(D_METHOD("set_glasses_y_position", "glasses_y_position"), &MiiDataResource::set_glasses_y_position);
     ClassDB::bind_method(D_METHOD("get_glasses_y_position"), &MiiDataResource::get_glasses_y_position);
 	
     //Mole
-    ClassDB::bind_method(D_METHOD("set_has_mole", "_has_mole"), &MiiDataResource::set_has_mole);
+    ClassDB::bind_method(D_METHOD("set_has_mole", "has_mole"), &MiiDataResource::set_has_mole);
     ClassDB::bind_method(D_METHOD("get_has_mole"), &MiiDataResource::get_has_mole);
     ClassDB::bind_method(D_METHOD("set_mole_scale", "mole_scale"), &MiiDataResource::set_mole_scale);
     ClassDB::bind_method(D_METHOD("get_mole_scale"), &MiiDataResource::get_mole_scale);
@@ -148,7 +154,7 @@ void MiiDataResource::_bind_methods(){
 
     //enums
 
-    //RegLockType
+    //RegionLockType
     BIND_ENUM_CONSTANT(REGLOCK_NONE);
     BIND_ENUM_CONSTANT(REGLOCK_JP_ONLY);
     BIND_ENUM_CONSTANT(REGLOCK_US_ONLY);
@@ -194,9 +200,24 @@ void MiiDataResource::_bind_methods(){
     BIND_ENUM_CONSTANT(MONTH_NOVEMBER);
     BIND_ENUM_CONSTANT(MONTH_DECEMBER);
 
-    //MiiSex
-    BIND_ENUM_CONSTANT(SEX_MALE);
-    BIND_ENUM_CONSTANT(SEX_FEMALE);
+    //MiiGender
+    BIND_ENUM_CONSTANT(GENDER_FEMALE);
+    BIND_ENUM_CONSTANT(GENDER_MALE);
+
+    //ValueMaximums
+    BIND_ENUM_CONSTANT(MAX_BODY_HEIGHT);
+    BIND_ENUM_CONSTANT(MAX_BODY_WIDTH);
+
+    BIND_ENUM_CONSTANT(MAX_HAIR_STYLE);
+    BIND_ENUM_CONSTANT(MAX_HAIR_COLOR);
+
+    BIND_ENUM_CONSTANT(MAX_EYE_STYLE);
+    BIND_ENUM_CONSTANT(MAX_EYE_COLOR);
+    BIND_ENUM_CONSTANT(MAX_EYE_X_SCALE);
+    BIND_ENUM_CONSTANT(MAX_EYE_Y_SCALE);
+    BIND_ENUM_CONSTANT(MAX_EYE_ROTATION);
+    BIND_ENUM_CONSTANT(MAX_EYE_X_SPACING);
+    BIND_ENUM_CONSTANT(MAX_EYE_Y_POSITION);
 
     ADD_GROUP("Meta", "");
     ADD_PROPERTY(PropertyInfo(Variant::INT, "version", PROPERTY_HINT_RANGE, "0,3"), "set_version", "get_version");
@@ -211,14 +232,14 @@ void MiiDataResource::_bind_methods(){
     ADD_PROPERTY(PropertyInfo(Variant::STRING, "mac_address"), "set_mac_address", "get_mac_address");
 
     ADD_GROUP("General", "");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "sex", PROPERTY_HINT_ENUM, "Male, Female"), "set_sex", "get_sex");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "gender", PROPERTY_HINT_ENUM, "Male, Female"), "set_gender", "get_gender");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "birthday_month", PROPERTY_HINT_ENUM, "January,February,March,April,May,June,July,August,September,October,November,December"), "set_birthday_month", "get_birthday_month"); 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "birthday_day", PROPERTY_HINT_RANGE, "1,31"), "set_birthday_day", "get_birthday_day"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "favorite_color", PROPERTY_HINT_ENUM, "Red,Orange,Yellow,Light Green, Dark Green, Blue, Light Blue, Pink, Purple, Brown, White, Black"), "set_favorite_color", "get_favorite_color"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "favorite_color", PROPERTY_HINT_ENUM, "Red,Orange,Yellow,Light Green, Dark Green, Blue, Light Blue, Pink, Purple, Brown, White, Black"), "get_favorite_color_value", "get_favorite_color_value"); 
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "favorite_mii"), "set_favorite_mii", "get_favorite_mii");
     ADD_PROPERTY(PropertyInfo(Variant::STRING, "mii_name"), "set_mii_name", "get_mii_name");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "width", PROPERTY_HINT_RANGE, "0,127"), "set_body_width", "get_body_width");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "height", PROPERTY_HINT_RANGE, "0,127"), "set_body_height", "get_body_height");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "width", PROPERTY_HINT_RANGE, "0,128"), "set_body_width", "get_body_width");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "height", PROPERTY_HINT_RANGE, "0,128"), "set_body_height", "get_body_height");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "sharable"), "set_sharable", "get_sharable");
     ADD_PROPERTY(PropertyInfo(Variant::STRING, "author"), "set_author", "get_author");
 
@@ -229,52 +250,52 @@ void MiiDataResource::_bind_methods(){
     ADD_PROPERTY(PropertyInfo(Variant::INT, "makeup"), "set_makeup", "get_makeup");
 
     ADD_GROUP("Hair", "");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "hair_style", PROPERTY_HINT_RANGE, "0,132"), "set_hair_style", "get_hair_style"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "hair_color", PROPERTY_HINT_RANGE, "0,8"), "set_hair_color", "get_hair_color"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "hair_style", PROPERTY_HINT_RANGE, "0,131"), "set_hair_style", "get_hair_style"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "hair_color", PROPERTY_HINT_RANGE, "0,7"), "set_hair_color_value", "get_hair_color_value"); 
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "is_hair_flipped"), "set_hair_flip", "get_hair_flip");
     
     ADD_GROUP("Eyes", "");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_style", PROPERTY_HINT_RANGE, "0,60"), "set_eye_style", "get_eye_style"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_color", PROPERTY_HINT_RANGE, "0,6"), "set_eye_color", "get_eye_color"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_x_scale", PROPERTY_HINT_RANGE, "0,8"), "set_eye_x_scale", "get_eye_y_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_y_scale", PROPERTY_HINT_RANGE, "0,7"), "set_eye_y_scale", "get_eye_y_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_rotation", PROPERTY_HINT_RANGE, "0,8"), "set_eye_rotation", "get_eye_rotation"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_x_spacing", PROPERTY_HINT_RANGE, "0,13"), "set_eye_x_spacing", "get_eye_x_spacing"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_y_position", PROPERTY_HINT_RANGE, "0,19"), "set_eye_y_position", "get_eye_y_position"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_style", PROPERTY_HINT_RANGE, "0,59"), "set_eye_style", "get_eye_style"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_color", PROPERTY_HINT_RANGE, "0,5"), "set_eye_color_value", "get_eye_color_value"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_x_scale", PROPERTY_HINT_RANGE, "0,7"), "set_eye_x_scale", "get_eye_x_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_y_scale", PROPERTY_HINT_RANGE, "0,6"), "set_eye_y_scale", "get_eye_y_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_rotation", PROPERTY_HINT_RANGE, "0,7"), "set_eye_rotation", "get_eye_rotation"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_x_spacing", PROPERTY_HINT_RANGE, "0,12"), "set_eye_x_spacing", "get_eye_x_spacing"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eye_y_position", PROPERTY_HINT_RANGE, "0,18"), "set_eye_y_position", "get_eye_y_position"); 
 
     ADD_GROUP("Eyebrows", "");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_style", PROPERTY_HINT_RANGE, "0,24"), "set_eyebrow_style", "get_eyebrow_style"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_color", PROPERTY_HINT_RANGE, "0,8"), "set_eyebrow_color", "get_eyebrow_color"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_x_scale", PROPERTY_HINT_RANGE, "0,9"), "set_eyebrow_x_scale", "get_eyebrow_x_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_y_scale", PROPERTY_HINT_RANGE, "0,7"), "set_eyebrow_y_scale", "get_eyebrow_y_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_rotation", PROPERTY_HINT_RANGE, "0,12"), "set_eyebrow_rotation", "get_eyebrow_rotation"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_x_spacing", PROPERTY_HINT_RANGE, "0,13"), "set_eyebrow_x_spacing", "get_eyebrow_x_spacing"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_y_position", PROPERTY_HINT_RANGE, "3,19"), "set_eyebrow_y_position", "get_eyebrow_y_position"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_style", PROPERTY_HINT_RANGE, "0,23"), "set_eyebrow_style", "get_eyebrow_style"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_color", PROPERTY_HINT_RANGE, "0,7"), "set_eyebrow_color_value", "get_eyebrow_color_value"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_x_scale", PROPERTY_HINT_RANGE, "0,8"), "set_eyebrow_x_scale", "get_eyebrow_x_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_y_scale", PROPERTY_HINT_RANGE, "0,6"), "set_eyebrow_y_scale", "get_eyebrow_y_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_rotation", PROPERTY_HINT_RANGE, "0,7"), "set_eyebrow_rotation", "get_eyebrow_rotation"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_x_spacing", PROPERTY_HINT_RANGE, "0,12"), "set_eyebrow_x_spacing", "get_eyebrow_x_spacing"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "eyebrow_y_position", PROPERTY_HINT_RANGE, "3,18"), "set_eyebrow_y_position", "get_eyebrow_y_position"); 
     
     ADD_GROUP("Nose", "");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "nose_style", PROPERTY_HINT_RANGE, "0,18"), "set_nose_style", "get_nose_style"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "nose_scale", PROPERTY_HINT_RANGE, "0,9"), "set_nose_scale", "get_nose_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "nose_y_position", PROPERTY_HINT_RANGE, "0,19"), "set_nose_y_position", "get_nose_y_position"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "nose_style", PROPERTY_HINT_RANGE, "0,17"), "set_nose_style", "get_nose_style"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "nose_scale", PROPERTY_HINT_RANGE, "0,8"), "set_nose_scale", "get_nose_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "nose_y_position", PROPERTY_HINT_RANGE, "0,18"), "set_nose_y_position", "get_nose_y_position"); 
     
     ADD_GROUP("Mouth", "");
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_style", PROPERTY_HINT_RANGE, "0,36"), "set_mouth_style", "get_mouth_style"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_color", PROPERTY_HINT_RANGE, "0,5"), "set_mouth_color", "get_mouth_color"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_x_scale", PROPERTY_HINT_RANGE, "0,9"), "set_mouth_x_scale", "get_mouth_x_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_y_scale", PROPERTY_HINT_RANGE, "0,7"), "set_mouth_y_scale", "get_mouth_y_scale"); 
-	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_y_position", PROPERTY_HINT_RANGE, "0,19"), "set_mouth_y_position", "get_mouth_y_position"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_style", PROPERTY_HINT_RANGE, "0,35"), "set_mouth_style", "get_mouth_style"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_color", PROPERTY_HINT_RANGE, "0,4"), "set_mouth_color_value", "get_mouth_color_value"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_x_scale", PROPERTY_HINT_RANGE, "0,8"), "set_mouth_x_scale", "get_mouth_x_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_y_scale", PROPERTY_HINT_RANGE, "0,6"), "set_mouth_y_scale", "get_mouth_y_scale"); 
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "mouth_y_position", PROPERTY_HINT_RANGE, "0,18"), "set_mouth_y_position", "get_mouth_y_position"); 
     
     ADD_GROUP("Facial Hair", "");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "beard_style", PROPERTY_HINT_RANGE, "0,6"), "set_beard_style", "get_beard_style"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "beard_color", PROPERTY_HINT_RANGE, "0,8"), "set_beard_color", "get_beard_color"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "mustache_style", PROPERTY_HINT_RANGE, "0,6"), "set_mustache_style", "get_mustache_style"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "mustache_scale", PROPERTY_HINT_RANGE, "0,9"), "set_mustache_scale", "get_mustache_scale"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "mustache_y_position", PROPERTY_HINT_RANGE, "0,17"), "set_mustache_y_position", "get_mustache_y_position");  
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "beard_style", PROPERTY_HINT_RANGE, "0,5"), "set_beard_style", "get_beard_style"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "beard_color", PROPERTY_HINT_RANGE, "0,7"), "set_beard_color_value", "get_beard_color_value"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "mustache_style", PROPERTY_HINT_RANGE, "0,5"), "set_mustache_style", "get_mustache_style"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "mustache_scale", PROPERTY_HINT_RANGE, "0,8"), "set_mustache_scale", "get_mustache_scale"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "mustache_y_position", PROPERTY_HINT_RANGE, "0,16"), "set_mustache_y_position", "get_mustache_y_position");  
     
     ADD_GROUP("Glasses", "");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_style", PROPERTY_HINT_RANGE, "0,9"), "set_glasses_style", "get_glasses_style"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_color", PROPERTY_HINT_RANGE, "0,6"), "set_glasses_color", "get_glasses_color"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_scale", PROPERTY_HINT_RANGE, "0,8"), "set_glasses_scale", "get_glasses_scale"); 
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_y_position", PROPERTY_HINT_RANGE, "0,21"), "set_glasses_y_position", "get_glasses_y_position"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_style", PROPERTY_HINT_RANGE, "0,8"), "set_glasses_style", "get_glasses_style"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_color", PROPERTY_HINT_RANGE, "0,5"), "set_glasses_color_value", "get_glasses_color_value"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_scale", PROPERTY_HINT_RANGE, "0,7"), "set_glasses_scale", "get_glasses_scale"); 
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "glasses_y_position", PROPERTY_HINT_RANGE, "0,20"), "set_glasses_y_position", "get_glasses_y_position"); 
     
     ADD_GROUP("Mole", "");
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "has_mole"), "set_has_mole", "get_has_mole");

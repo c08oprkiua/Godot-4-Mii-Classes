@@ -1,4 +1,19 @@
 
 Import('env')
 
-env.add_source_files(env.modules_sources, "*.cpp")
+module_env = env.Clone()
+
+mii_base = [
+    "register_types.cpp"
+]
+module_env.add_source_files(env.modules_sources, mii_base)
+
+mii_resource = [
+    "mii_resource/mii_data.cpp",
+    "mii_resource/mii_data_bindings.cpp",
+    "mii_resource/mii_data_set_gets.cpp",
+    "mii_resource/mii_data_loaders.cpp",
+    "mii_resource/mii_data_exporters.cpp"
+]
+
+module_env.add_source_files(env.modules_sources, mii_resource)

@@ -1,59 +1,49 @@
-# Godot-4-Mii-Classes
+# Godot-Mii-Module
 
-This is a work in progress C++ Godot Module that aims to make working with Miis much easier. Currently, it adds a custom class, `MiiDataResource`, to Godot 4 (Currently tested on 4.2.x), which extends from `Resource`.
+This is a work in progress C++ Godot Module that aims to make working with Miis much easier, including:
+* An easy to use `Resource`, 'MiiDataResource', for importing, creating, editing, and exporting Nintendo-valid Mii data
 
-In the future, I also plan to add a custom 3D model class, which will take the aforementioned resource as an input, and accordingly render an accurate Mii. I also might add something akin for getting a 2D portrait of the Mii.
+# MiiDataResource
 
-# Functions
+The main part of this module, this `Resource` derivative allows for easy modification of values within a Mii. It features automatic behind-the-scenes checking for valid values, so you don't have to worry about accidentally setting out-of-range values. It also uses a memory model based on the Mii data format itself, making it quite memory friendly.
 
-### `LoadFromBuffer(buffer: PackedByteArray)`
+## Functions
 
-(Incomplete, non-working) This takes a PackedByteArray, `buffer`, of Mii data and writes all the data of it to the variables of the `MiiDataResource` it is called on. Currently, this expects the most recent revision of the Mii data spec (used by the Wii U and Switch), but future support is planned for older revisions.
+### `LoadFromBuffer(buffer:PackedByteArray) -> void`
 
-### `WriteToBuffer()`
+(Incomplete, non-working) This loads a PackedByteArray, `buffer`, of Mii data into the `MiiDataResource`. It can automatically detect file versions in order to properly load the data into the resource regardless on its version.
 
-(Not implemented yet) Writes all the variables of the `MiiDataResource` instance to a valid mii data buffer, and returns it as a `PackedByteArray`. 
+### `WriteToBuffer(output_device:Devices) -> PackedByteArray`
 
-# To-do/roadmap
+(Not implemented yet) Writes all the variables of the `MiiDataResource` instance to a valid mii data buffer, and returns it as a `PackedByteArray`. `output_device` is used to specify what kind of device the output Mii data will be for. If not set, it will default to whatever the origin device of the `MiiDataResource` is.
 
-- [x] ~~Add To-do list~~
+## To-do
 
-## `MiiDataResource`:
-
-- [ ] Functions:
-  - [ ] `LoadBuffer`
-  - [ ] `WriteToBuffer`
-  - [ ] "Generate Random Mii" type function 
-- [ ] Clamp variables to valid ranges
-  - [ ] Meta
-  - [ ] General
-  - [ ] Face Misc.
-  - [x] Hair
-  - [x] Eyes
-  - [x] Eyebrows
-  - [x] Nose
-  - [x] Mouth
-  - [x] Facial Hair
-  - [x] Glasses
-  - [x] Mole
-- [ ] Implement variables:
-  - [ ] Meta
-  - [ ] General
-  - [ ] Face Misc.
-  - [x] Hair
-  - [x] Eyes
-  - [x] Eyebrows
-  - [x] Nose
-  - [x] Mouth
-  - [x] Facial Hair
-  - [x] Glasses
-  - [x] Mole
+- [ ] Importing:
+  - [ ] Wii
+  - [ ] DS
+  - [ ] 3DS
+  - [ ] Wii U / Switch
+- [ ] Exporting:
+  - [ ] Wii
+  - [ ] DS
+  - [ ] 3DS
+  - [ ] Wii U / Switch
+- [ ] "Generate Random Mii" type function 
 - [ ] Improve in-engine docs
-  
-  ## `MiiModel`
+
+# MiiModel
+
+A planned class derived from `Mesh`, which will use a `MiiDataResource` as a parameter set in order to provide a `Mesh` for rendering a Mii in 3D space.
+
+## To-do
 - [ ] Create
   
-  ## `MiiPortrait`
+# MiiPortrait
+
+A planned class derived from `Image` that will, like `MiiModel`, take a `MiiDataResource`, and render it in *2D* space as an image.
+
+## To-do
 - [ ] Create
 
 # Thanks to:
